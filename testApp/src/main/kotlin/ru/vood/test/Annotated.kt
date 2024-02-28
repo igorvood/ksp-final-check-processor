@@ -4,6 +4,6 @@ package ru.vood.test
 //@DeprecatedSinceKotlin("asd", "asd", "ASd")
 final class Annotated {
 
-    @Deprecated("asd")
+//    @Deprecated("asd")
     final fun qwerty(){}
 }

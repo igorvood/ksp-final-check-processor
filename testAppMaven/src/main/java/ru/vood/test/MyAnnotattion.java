@@ -1,4 +1,4 @@
-package test;
+package ru.vood.test;
 
 import java.lang.annotation.*;
 

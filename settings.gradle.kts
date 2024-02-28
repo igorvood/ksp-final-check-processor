@@ -1,4 +1,4 @@
-//плугшин с кодо генерацией https://habr.com/ru/companies/yota/articles/565440/
+//плугин с кодо генерацией https://habr.com/ru/companies/yota/articles/565440/
 pluginManagement {
     val kotlinVersion: String by settings
     val kspVersion: String by settings

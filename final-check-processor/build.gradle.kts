@@ -2,7 +2,12 @@ val kspVersion: String by project
 
 plugins {
     kotlin("jvm")
+    `maven-publish`
+//    id("maven-publish")
 }
+
+group = "com.jetbrains"
+version = "1.0-SNAPSHOT"
 
 dependencies {
 //    implementation("com.google.devtools.ksp:symbol-processing-api:$kspVersion")
@@ -26,3 +31,25 @@ dependencies {
 repositories {
     mavenCentral()
 }
+
+publishing{
+    publications{
+        create<MavenPublication>("maven") {
+            groupId = "ru.vood.ksp"
+            artifactId = "final-check"
+            version = "1.1"
+
+            from(components["java"])
+        }
+    }
+}
+//publishing {
+//    publications {
+//        maven(MavenPublication) {
+//            groupId 'org.gradle.sample'
+//            artifactId 'project1-sample'
+//            version '1.1'
+//            from components.java
+//        }
+//    }
+//}

@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
-
 plugins {
     id("com.google.devtools.ksp")
     kotlin("jvm")
@@ -16,15 +14,21 @@ dependencies {
 }
 
 ksp {
-    arg("annotation", "kotlin.Deprecated")
-    arg("requiredModifiers", "OPEN;")
+    arg("annotation", "kotlin.Deprecated;ru.vood.test.MyAnnotattion")
+//    arg("requiredModifiers", "OPEN;")
 //    arg("prohibitedModifiers", "FINAL;")
+
+    arg("requiredModifiers", "PUBLIC;")
+    arg("prohibitedModifiers", "FINAL;")
+
+
 }
 
 kotlin {
     sourceSets.main {
         kotlin.srcDirs(
             "src/main/kotlin",
-            "build/generated/ksp/main/kotlin")
+            "build/generated/ksp/main/kotlin"
+        )
     }
 }

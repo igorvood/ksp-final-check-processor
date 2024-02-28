@@ -68,7 +68,7 @@ class FinalCheckProcessor(environment: SymbolProcessorEnvironment) : BaseSymbolP
 
 
         if (notExistModifier.isNotEmpty()) {
-            kspLogger.error("$objectName must contains Modifiers $notExistModifier", ksAnno)
+            kspLogger.error("$objectName must contains Modifiers $notExistModifier. Current Modifiers are $modifiers", ksAnno)
         }
 
         val prohibitedModifier = prohibitedModifiers.filter { modifier ->

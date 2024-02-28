@@ -36,18 +36,27 @@
                 <executions>
                     <execution>
                         <id>compile</id>
-<!--                        <phase>compile</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>compile</goal>-->
-<!--                        </goals>-->
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
                     </execution>
                 </executions>
                 <configuration>
                     <compilerPlugins>
                         <compilerPlugin>ksp</compilerPlugin>
                     </compilerPlugins>
+                    <!--                    <pluginOptions>-->
+                    <!--                        <option>ksp:annotation=kotlin.Deprecated;ru.vood.test.MyAnnotattion</option>-->
+                    <!--                    </pluginOptions>-->
                 </configuration>
                 <dependencies>
+                    <dependency>
+<!--                        https://github.com/Dyescape/kotlin-maven-symbol-processing?ysclid=lt675ekg2e652570523-->
+                        <groupId>com.dyescape</groupId>
+                        <artifactId>kotlin-maven-symbol-processing</artifactId>
+                        <version>1.7-SNAPSHOT</version>
+                    </dependency>
                     <dependency>
                         <groupId>ru.vood.ksp</groupId>
                         <artifactId>final-check</artifactId>
@@ -63,7 +72,7 @@
 
     <properties>
 
-        <java.version>17</java.version>
+        <java.version>1.8</java.version>
 
         <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
     </properties>

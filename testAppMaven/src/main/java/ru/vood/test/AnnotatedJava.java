@@ -1,6 +1,6 @@
 package ru.vood.test;
 
-//@MyAnnotattion
+@MyAnnotattion
 public class AnnotatedJava {
 
 //    @MyAnnotattion

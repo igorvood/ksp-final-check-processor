@@ -10,7 +10,11 @@
     <packaging>jar</packaging>
 
     <dependencies>
-
+        <dependency>
+            <groupId>com.dyescape</groupId>
+            <artifactId>kotlin-maven-symbol-processing</artifactId>
+            <version>1.7-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>ru.vood.ksp</groupId>
             <artifactId>final-check</artifactId>
@@ -32,7 +36,7 @@
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
-                <version>1.7.20</version>
+                <version>1.9.22</version>
                 <executions>
                     <execution>
                         <id>compile</id>
@@ -46,9 +50,6 @@
                     <compilerPlugins>
                         <compilerPlugin>ksp</compilerPlugin>
                     </compilerPlugins>
-                    <!--                    <pluginOptions>-->
-                    <!--                        <option>ksp:annotation=kotlin.Deprecated;ru.vood.test.MyAnnotattion</option>-->
-                    <!--                    </pluginOptions>-->
                 </configuration>
                 <dependencies>
                     <dependency>

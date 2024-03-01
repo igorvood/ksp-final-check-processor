@@ -16,7 +16,12 @@ class FinalCheckProcessor(environment: SymbolProcessorEnvironment) : BaseSymbolP
     override fun processRound(resolver: Resolver): List<KSAnnotated> {
 
 
-        val requiredModifiers = extractParam(environment.options[requiredModifiersParamName]) { paramStr ->
+        val requiredModifiersParam = environment.options[requiredModifiersParamName]?:"PUBLIC;"
+        val prohibitedModifiersParam = environment.options[prohibitedModifiersParamName]?:"FINAL;"
+        val annotationParam = environment.options[annotationParamName]?:"kotlin.Deprecated;ru.vood.test.MyAnnotation"
+
+
+        val requiredModifiers = extractParam(requiredModifiersParam) { paramStr ->
             kotlin.runCatching { Modifier.valueOf(paramStr) }.getOrElse { err ->
                 error(
                     "for Parameter $requiredModifiersParamName No enum constant ${Modifier::class.simpleName}.$paramStr allow values are -> ${
@@ -25,7 +30,8 @@ class FinalCheckProcessor(environment: SymbolProcessorEnvironment) : BaseSymbolP
                 )
             }
         }
-        val prohibitedModifiers = extractParam(environment.options[prohibitedModifiersParamName]) { paramStr ->
+
+        val prohibitedModifiers = extractParam(prohibitedModifiersParam) { paramStr ->
             kotlin.runCatching { Modifier.valueOf(paramStr) }.getOrElse { err ->
                 error(
                     "for Parameter $prohibitedModifiersParamName No enum constant ${Modifier::class.simpleName}.$paramStr allow values are -> ${
@@ -36,7 +42,8 @@ class FinalCheckProcessor(environment: SymbolProcessorEnvironment) : BaseSymbolP
 
         }
 
-        val annotation = extractParam(environment.options[annotationParamName]) { it }
+
+        val annotation = extractParam(annotationParam) { it }
 
         require(annotation.isNotEmpty()) { kspLogger.error("set param $annotationParamName") }
         require(requiredModifiers.isNotEmpty() || prohibitedModifiers.isNotEmpty()) { kspLogger.error("set param $requiredModifiersParamName or $prohibitedModifiersParamName") }

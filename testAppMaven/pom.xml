@@ -50,6 +50,11 @@
                     <compilerPlugins>
                         <compilerPlugin>ksp</compilerPlugin>
                     </compilerPlugins>
+                    <pluginOptions>
+                        <option>ksp:apoption=annotation=kotlin.Deprecated;ru.vood.test.MyAnnotattion</option>
+                        <option>ksp:apoption=requiredModifiers=PUBLIC;</option>
+                        <option>ksp:apoption=prohibitedModifiers=FINAL;</option>
+                    </pluginOptions>
                 </configuration>
                 <dependencies>
                     <dependency>

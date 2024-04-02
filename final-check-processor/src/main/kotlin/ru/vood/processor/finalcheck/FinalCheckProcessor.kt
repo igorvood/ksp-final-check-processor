@@ -61,7 +61,7 @@ class FinalCheckProcessor(environment: SymbolProcessorEnvironment) : BaseSymbolP
         val annotatedObjectKotlinObjectList = annotation.flatMap { annotation ->
             resolver.getSymbolsWithAnnotation(checkNotNull(annotation)).toList()
         }
-
+        // сбор мета информации для генерации
         // анализ или кодогенерация
         annotatedObjectKotlinObjectList
             .forEach {ksAnno ->

@@ -15,6 +15,9 @@ class FinalCheckProcessor(environment: SymbolProcessorEnvironment) : BaseSymbolP
     private val annotationParamName = "annotation"
     override fun processRound(resolver: Resolver): List<KSAnnotated> {
 
+        kspLogger.warn("Run with param $requiredModifiersParamName => ${environment.options[requiredModifiersParamName]}")
+        kspLogger.warn("Run with param $prohibitedModifiersParamName => ${environment.options[prohibitedModifiersParamName]}")
+        kspLogger.warn("Run with param $annotationParamName => ${environment.options[annotationParamName]}")
 
         val requiredModifiersParam = environment.options[requiredModifiersParamName]?:"PUBLIC;"
         val prohibitedModifiersParam = environment.options[prohibitedModifiersParamName]?:"FINAL;"
@@ -45,14 +48,22 @@ class FinalCheckProcessor(environment: SymbolProcessorEnvironment) : BaseSymbolP
 
         val annotation = extractParam(annotationParam) { it }
 
+        kspLogger.warn("""Extracted parameters annotation => $annotation
+            |prohibitedModifiers => $prohibitedModifiers
+            |requiredModifiers => $requiredModifiers
+        """.trimMargin())
+
         require(annotation.isNotEmpty()) { kspLogger.error("set param $annotationParamName") }
         require(requiredModifiers.isNotEmpty() || prohibitedModifiers.isNotEmpty()) { kspLogger.error("set param $requiredModifiersParamName or $prohibitedModifiersParamName") }
 
-        val deprecatedKotlinObjectList = annotation.flatMap { annotation ->
+
+
+        val annotatedObjectKotlinObjectList = annotation.flatMap { annotation ->
             resolver.getSymbolsWithAnnotation(checkNotNull(annotation)).toList()
         }
 
-        deprecatedKotlinObjectList
+
+        annotatedObjectKotlinObjectList
             .forEach {ksAnno ->
                 when(ksAnno){
                     is KSClassDeclaration ->check(requiredModifiers, ksAnno.modifiers, ksAnno, prohibitedModifiers, "Class")
